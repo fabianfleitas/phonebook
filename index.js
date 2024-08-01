@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(express.static("dist"));
 
-morgan.token("type", function (req, res) {
+morgan.token("type", function (req) {
   if (req.method == "POST") {
     return JSON.stringify(req.body);
   }
@@ -106,7 +106,7 @@ app.put("/api/persons/:id", (req, res, next) => {
   }
 
   if (error) {
-    return response.status(400).json({ error });
+    return res.status(400).json({ error });
   }
 
   const updatedPerson = { name, number };
